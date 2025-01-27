@@ -1,10 +1,16 @@
 package main
 
+import (
+	"net/http"
+	"github.com/gin-gonic/gin"
+	//"errors"
+)
+
 type book struct {
-	ID       string `json:"id"`
-	Title    string `json:"title"`
-	Author   string `json:"author"`
-	Quantity int    `json:"quantity"`
+	ID       string `json:"id" binding:"required"` 
+	Title    string `json:"title" binding:"required"`
+	Author   string `json:"author" binding:"required"`
+	Quantity int    `json:"quantity" binding:"required"`
 }
 
 var books = []book{
@@ -13,4 +19,25 @@ var books = []book{
 	{ID: "3", Title: "War and Peace", Author: "Leo Tolstoy", Quantity: 6},
 }
 
-func main() {}
+func getBooks(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, books)
+}
+
+func createBook(c *gin.Context) {
+	var newBook book
+
+	if err := c.BindJSON(&newBook); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	books = append(books, newBook)
+	c.IndentedJSON(http.StatusCreated, newBook)
+}
+
+func main() {
+	router := gin.Default()
+	router.GET("/books", getBooks)
+	router.POST("/books", createBook)
+	router.Run("localhost:8080")
+}
