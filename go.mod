@@ -1,4 +1,4 @@
-module example/GoLibrary
+module github.com/LucasMacena09/GoLibrary
 
 go 1.23.4
 
