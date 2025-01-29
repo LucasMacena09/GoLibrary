@@ -1,4 +1,4 @@
-# Bookstore API
+# GoLibrary API
 
 This is my first API built with **Go** using the **Gin** framework. The project is a simple **Bookstore API** that allows users to:
 - Retrieve all books
@@ -14,7 +14,7 @@ In a production environment, this would be replaced by a proper database such as
 
 ## Project Structure
 ```
-bookstore/
+GoLibrary/
 ├── main.go
 ├── models/
 │   ├── book.go
@@ -33,8 +33,8 @@ bookstore/
 
 ### Steps:
 ```sh
-git clone https://github.com/yourusername/bookstore-api.git
-cd bookstore-api
+git clone https://github.com/LucasMacena09/GoLibrary.git
+cd GoLibrary
 go run main.go
 ```
 
